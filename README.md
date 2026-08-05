@@ -1,18 +1,36 @@
+<div align="center">
+   
+# DAVID Robot XSEN光捕  GMR-motion_tracking CODE
+
+</div>
+
 # 首先安装IsaacLab-2.3.1以及isaacsim5.1
 
-#  XSEN光捕重定向         GMR-motion_tracking
+
 
 查看是否处于T-pose状态，根据实际情况进行调整。
 
-`conda activate gmr`
+```
+conda activate gmr
+python -m mujoco.viewer
+```
+拖入xml模型，关闭重力即可
 
+<div align="center">
+<img width="800" alt="image" src="https://github.com/user-attachments/assets/b50cc0d9-cbba-48db-a85e-88fa39b53680" />
+</div>
 
 # 仅生成 offset 和 IK 配置
 
-`python scripts/calibrate_bvh_xsens_to_david.py`
+```
+python scripts/calibrate_bvh_xsens_to_david.py
+```
+
 # 或标定后顺便看 T-pose
 
-`python scripts/calibrate_bvh_xsens_to_david.py --view`
+```
+python scripts/calibrate_bvh_xsens_to_david.py --view
+```
 
 如图为T-pose状态
 <div align="center">
@@ -68,7 +86,9 @@ python scripts/vis_robot_motion.py \
 # 进行pkl到csv文件格式的转换
 将pkl 复制一份到./motions 输出csv转化文件到 ./motions/csv中
 
-`python scripts/batch_gmr_pkl_to_csv.py --folder pkl_export`
+```
+python scripts/batch_gmr_pkl_to_csv.py --folder pkl_export
+```
 
 
 
@@ -125,6 +145,7 @@ rsync -avh --progress \
 cd /home/xxp/data/whole_body_tracking
 mkdir -p /home/xxp/data/tmp
 ```
+
 ```
 export CUDA_VISIBLE_DEVICES=0
 export TMPDIR=/home/xxp/data/tmp
