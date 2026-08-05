@@ -15,18 +15,33 @@ python scripts/calibrate_bvh_xsens_to_david.py --view
 </div>
 
 
-获取偏移 general_motion_retargeting/ik_configs/bvh_xsens_to_unt_david.json
+获取偏移 
+在文档
+general_motion_retargeting/ik_configs/bvh_xsens_to_unt_david.json
+
+
 conda activate gmr
 cd /home/unt/pro1/gmr_unt
 同步 IK 配置
 cp calibration_output/bvh_xsens_to_unt_david.calibrated.json \
    general_motion_retargeting/ik_configs/bvh_xsens_to_unt_david.json
 
+
+
 进行重定向，根据重定向中的实际情况进行ik配置微调（权重和坐标）
+使用文件绝对路径
 python scripts/xsens_bvh_to_robot.py \
-  --bvh_file walk.bvh \
+  --bvh_file /home/unt/pro1/gmr_unt/assets/xsens_bvh_test/251021_04_boxing_120Hz_cm_3DsMax.bvh \
   --robot unt_david \
-  --save_path output_unt_david.pkl
+  --save_path /home/unt/pro1/gmr_unt/output_unt_david.pkl
+
+  重定向如图
+  <div align="center">
+  <img width="800" alt="截图 2026-08-05 10-52-20" src="https://github.com/user-attachments/assets/4f99e4e5-17ff-4bac-be81-c4c1d43f3554" />
+     
+   <div align="center">
+   <img width="800" alt="截图 2026-08-05 10-52-14" src="https://github.com/user-attachments/assets/c66e0426-b1fb-4d84-a3d2-175de6ba46b0" />
+
 
 进行回放查看效果
 python scripts/vis_robot_motion.py \
