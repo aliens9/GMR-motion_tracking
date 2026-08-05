@@ -235,6 +235,13 @@ tmux select-layout tiled
 tmux attach -t mimic
 ```
 
+对每个分屏进行
+```
+cd ~/pro1/unt_humanoid
+source install/setup.bash
+source scripts/local_pc/env.sh mujoco
+```
+ 
 5个屏分别执行
 0
 ```
