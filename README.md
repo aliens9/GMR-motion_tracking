@@ -10,7 +10,10 @@
 
 </div>
 
-# 首先安装IsaacLab-2.3.1以及isaacsim5.1
+# 本地显卡配置
+<div align="center">
+<img width="800" alt="image" src="https://github.com/user-attachments/assets/12b982b0-f0ad-478e-b948-fa59b02c5acd" />
+</div>
 
 
 
