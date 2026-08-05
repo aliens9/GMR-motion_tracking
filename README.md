@@ -85,10 +85,21 @@ python scripts/csv_to_npz_unt.py \
   --output_name unt_david_20dof \
   --output_file /home/unt/pro1/generated_motions/unt_david_20dof.npz
 ```
+<div align="center">
+<img width="800" alt="image" src="https://github.com/user-attachments/assets/32fd9ea8-7f55-4f63-bdf7-78ae3f294b95" />
+</div>
 
 进行回放测试
+
+```
 python scripts/replay_npz_unt.py \
   --motion_file /home/unt/pro1/generated_motions/unt_david_20dof.npz
+```
+
+<div align="center">
+<img width="800" alt="image" src="https://github.com/user-attachments/assets/28934bd1-2767-43e9-b6fd-7dc770ab9dd7" />
+</div>
+
 
 
 # 在本地终端执行上传到服务器：
@@ -155,6 +166,10 @@ cp -a \
 conda activate motion_npz
 python scripts/rsl_rl/play.py   --task Tracking-Flat-UNT-v0   --num_envs 1   --load_run 2026-08-04_18-18-48_unt20dof_server_train --checkpoint model_29999.pt   --motion_file /home/unt/pro1/generated_motions/unt_david_20dof.npz
 ```
+
+<div align="center">
+<img width="800" alt="image" src="https://github.com/user-attachments/assets/c07fc247-c521-41ec-9387-67acb7432d03" />
+</div>
 
 
 
