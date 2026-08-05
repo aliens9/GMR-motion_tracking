@@ -17,7 +17,7 @@ python -m mujoco.viewer
 拖入xml模型，关闭重力即可
 
 <div align="center">
-<img width="800" alt="image" src="https://github.com/user-attachments/assets/b50cc0d9-cbba-48db-a85e-88fa39b53680" />
+<img width="800" alt="image" src="https://github.com/user-attachments/assets/52828d86-d1f1-4b7b-8cec-d0dd7cba2d76" />
 </div>
 
 按下键盘空格键（Space），手动调整模型joint到标准T-pose状态
