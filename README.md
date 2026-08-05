@@ -217,10 +217,13 @@ cd /home/unt/pro1/unt_humanoid/docker/desktop
 
 ```
 在install中rl deploy调整config mimic.yaml中的onnx路径以及帧数 以及kp和kd参数action scale
+```
 cd ~/pro1/unt_humanoid/docker/desktop
 ./start.sh
+```
 
 创建5个分屏
+```
 tmux new-session -s mimic -d
 tmux split-window -h
 tmux split-window -v
@@ -230,16 +233,26 @@ tmux select-pane -t 2
 tmux split-window -v
 tmux select-layout tiled
 tmux attach -t mimic
-
+```
 
 5个屏分别执行
 0
+```
 ros2 run david david
+```
 1
+```
 ros2 launch david robot_state_publisher.launch.py
+```
 2
+```
 ros2 launch control control.launch.py
+```
 3
+```
 ros2 launch rl_deployment agent.launch.py
+```
 4
+```
 ros2 launch mujoco_simulator mujoco.launch.py
+```
