@@ -8,7 +8,7 @@
 
 
 
-# 查看是否处于T-pose状态，根据实际情况进行调整。
+# 查看Robot是否处于T-pose状态，根据实际情况进行调整。
 
 ```
 conda activate gmr
