@@ -263,3 +263,17 @@ ros2 launch rl_deployment agent.launch.py
 ```
 ros2 launch mujoco_simulator mujoco.launch.py
 ```
+新建一个终端
+```
+cd ~/pro1/unt_humanoid/docker/desktop
+./start.sh
+```
+
+```
+cd ~/pro1/unt_humanoid
+source install/setup.bash
+source scripts/local_pc/env.sh mujoco
+```
+`
+ros2 topic pub --once /rl/fsm_switch std_msgs/msg/Int32 "{data: 26}"
+`
