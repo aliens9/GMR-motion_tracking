@@ -1,13 +1,18 @@
+# 首先安装IsaacLab-2.3.1以及isaacsim5.1
+
 # GMR-motion_tracking
 
 查看是否处于T-pose状态，根据实际情况进行调整。
-conda activate gmr
+
+`conda activate gmr`
 
 
 # 仅生成 offset 和 IK 配置
-python scripts/calibrate_bvh_xsens_to_david.py
+
+`python scripts/calibrate_bvh_xsens_to_david.py`
 # 或标定后顺便看 T-pose
-python scripts/calibrate_bvh_xsens_to_david.py --view
+
+`python scripts/calibrate_bvh_xsens_to_david.py --view`
 
 如图为T-pose状态
 <div align="center">
@@ -15,48 +20,62 @@ python scripts/calibrate_bvh_xsens_to_david.py --view
 </div>
 
 
-获取偏移 
-在文档
+# 获取偏移 ,在文档
 general_motion_retargeting/ik_configs/bvh_xsens_to_unt_david.json
 
 
+```
 conda activate gmr
 cd /home/unt/pro1/gmr_unt
-同步 IK 配置
+```
+# 同步 IK 配置
+```
 cp calibration_output/bvh_xsens_to_unt_david.calibrated.json \
    general_motion_retargeting/ik_configs/bvh_xsens_to_unt_david.json
+```
 
 
-
-进行重定向，根据重定向中的实际情况进行ik配置微调（权重和坐标）
+# 进行重定向，根据重定向中的实际情况进行ik配置微调（权重和坐标）
 使用文件绝对路径
+```
 python scripts/xsens_bvh_to_robot.py \
   --bvh_file /home/unt/pro1/gmr_unt/assets/xsens_bvh_test/251021_04_boxing_120Hz_cm_3DsMax.bvh \
   --robot unt_david \
   --save_path /home/unt/pro1/gmr_unt/output_unt_david.pkl
+```
 
-  重定向如图
-  <div align="center">
-  <img width="800" alt="截图 2026-08-05 10-52-20" src="https://github.com/user-attachments/assets/4f99e4e5-17ff-4bac-be81-c4c1d43f3554" />
+重定向如图
+<div align="center">
+<img width="800" alt="截图 2026-08-05 10-52-20" src="https://github.com/user-attachments/assets/4f99e4e5-17ff-4bac-be81-c4c1d43f3554" />
      
-   <div align="center">
-   <img width="800" alt="截图 2026-08-05 10-52-14" src="https://github.com/user-attachments/assets/c66e0426-b1fb-4d84-a3d2-175de6ba46b0" />
+<img width="800" alt="截图 2026-08-05 10-52-14" src="https://github.com/user-attachments/assets/c66e0426-b1fb-4d84-a3d2-175de6ba46b0" />
+</div>
+
 
 
 进行回放查看效果
+```
 python scripts/vis_robot_motion.py \
   --robot unt_david \
-  --robot_motion_path <你的.pkl路径>
+  --robot_motion_path /home/unt/pro1/gmr_unt/output_unt_david.pkl
+```
+ 
+<div align="center">
+<img width="800" alt="截图 2026-08-05 10-58-34" src="https://github.com/user-attachments/assets/62c5e8e0-0577-41ac-8bb3-689d3c72f1d0" />
+</div>
 
 
-进行pkl到csv文件格式的转换
+# 进行pkl到csv文件格式的转换
 将pkl 复制一份到./motions 输出csv转化文件到 ./motions/csv中
-python scripts/batch_gmr_pkl_to_csv.py --folder pkl_export
+
+`python scripts/batch_gmr_pkl_to_csv.py --folder pkl_export`
 
 
 
 
-进行csv到npz文件的转换
+# 进行csv到npz文件的转换
+
+```
 conda activate motion_npz
 cd whole_body_tracking
 python scripts/csv_to_npz_unt.py \
@@ -65,6 +84,8 @@ python scripts/csv_to_npz_unt.py \
   --output_fps 50 \
   --output_name unt_david_20dof \
   --output_file /home/unt/pro1/generated_motions/unt_david_20dof.npz
+```
+
 进行回放测试
 python scripts/replay_npz_unt.py \
   --motion_file /home/unt/pro1/generated_motions/unt_david_20dof.npz
