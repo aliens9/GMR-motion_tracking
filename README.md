@@ -21,6 +21,9 @@ python -m mujoco.viewer
 </div>
 
 按下键盘空格键（Space），手动调整模型joint到标准T-pose状态
+<div align="center">
+<img width="800" alt="image" src="https://github.com/user-attachments/assets/77209971-4f1b-40ec-9bc6-3b75cc5e601e" />
+</div>
 # 仅生成 offset 和 IK 配置
 
 ```
