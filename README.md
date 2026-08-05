@@ -104,13 +104,15 @@ rsync -avh --progress \
 
 
 
-  开始服务器上的训练
+# 开始服务器上的训练
 
-安装IsaacLab-2.3.1以及isaacsim5.1
+# 安装IsaacLab-2.3.1以及isaacsim5.1
+
+```
 cd /home/xxp/data/whole_body_tracking
-
 mkdir -p /home/xxp/data/tmp
-
+```
+```
 export CUDA_VISIBLE_DEVICES=0
 export TMPDIR=/home/xxp/data/tmp
 export TEMP=/home/xxp/data/tmp
@@ -125,23 +127,32 @@ scripts/rsl_rl/train_local.py \
   --logger tensorboard \
   --run_name unt20dof_server_train \
   --num_envs 4096
+```
 
 
 
-  训练完成从服务器获取训练目录
+# 训练完成从服务器获取训练目录
+
+```
 rsync -avh --progress   xxp@10.193.128.35:/home/xxp/data/whole_body_tracking/logs/rsl_rl/unt_flat/2026-08-04_18-18-48_unt20dof_server_train/   /home/unt/pro1/server_training/2026-08-04_18-18-48_unt20dof_server_train/
+```
 
 
 
-先在isaacsim下生成policy.pt
+# 先在isaacsim下生成policy.pt
+
+```
 RUN="2026-08-04_18-18-48_unt20dof_server_train"
 mkdir -p /home/unt/pro1/whole_body_tracking/logs/rsl_rl/unt_flat
 cp -a \
   "/home/unt/pro1/server_training/$RUN" \
   /home/unt/pro1/whole_body_tracking/logs/rsl_rl/unt_flat/
-
+```
+# 回到本地查看训练效果
+```
 conda activate motion_npz
 python scripts/rsl_rl/play.py   --task Tracking-Flat-UNT-v0   --num_envs 1   --load_run 2026-08-04_18-18-48_unt20dof_server_train --checkpoint model_29999.pt   --motion_file /home/unt/pro1/generated_motions/unt_david_20dof.npz
+```
 
 
 
