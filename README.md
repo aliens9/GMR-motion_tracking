@@ -8,7 +8,7 @@
 
 
 
-查看是否处于T-pose状态，根据实际情况进行调整。
+# 查看是否处于T-pose状态，根据实际情况进行调整。
 
 ```
 conda activate gmr
@@ -20,6 +20,7 @@ python -m mujoco.viewer
 <img width="800" alt="image" src="https://github.com/user-attachments/assets/b50cc0d9-cbba-48db-a85e-88fa39b53680" />
 </div>
 
+按下键盘空格键（Space），手动调整模型joint到标准T-pose状态
 # 仅生成 offset 和 IK 配置
 
 ```
