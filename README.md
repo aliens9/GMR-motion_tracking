@@ -4,20 +4,18 @@
 conda activate gmr
 
 
-<div align="center">
-<img width="800" alt="截图 2026-08-05 10-38-30" src="https://github.com/user-attachments/assets/c982e941-4bcc-46bd-a3f2-bfe70f3bee24" />
-</div>
-
-
-
 # 仅生成 offset 和 IK 配置
 python scripts/calibrate_bvh_xsens_to_david.py
 # 或标定后顺便看 T-pose
 python scripts/calibrate_bvh_xsens_to_david.py --view
 
+如图为T-pose状态
+<div align="center">
+<img width="800" alt="截图 2026-08-05 10-38-30" src="https://github.com/user-attachments/assets/c982e941-4bcc-46bd-a3f2-bfe70f3bee24" />
+</div>
+
+
 获取偏移 general_motion_retargeting/ik_configs/bvh_xsens_to_unt_david.json
-
-
 conda activate gmr
 cd /home/unt/pro1/gmr_unt
 同步 IK 配置
