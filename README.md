@@ -3,7 +3,11 @@
 查看是否处于T-pose状态，根据实际情况进行调整。
 conda activate gmr
 
-<img width="2094" height="1406" alt="截图 2026-08-05 10-38-30" src="https://github.com/user-attachments/assets/c982e941-4bcc-46bd-a3f2-bfe70f3bee24" />
+
+<div align="center">
+<img width="800" alt="截图 2026-08-05 10-38-30" src="https://github.com/user-attachments/assets/c982e941-4bcc-46bd-a3f2-bfe70f3bee24" />
+</div>
+
 
 
 # 仅生成 offset 和 IK 配置
