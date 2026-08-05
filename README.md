@@ -274,6 +274,6 @@ cd ~/pro1/unt_humanoid
 source install/setup.bash
 source scripts/local_pc/env.sh mujoco
 ```
-`
+```
 ros2 topic pub --once /rl/fsm_switch std_msgs/msg/Int32 "{data: 26}"
-`
+```
