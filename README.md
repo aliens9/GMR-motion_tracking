@@ -68,7 +68,9 @@ rsync -avh --progress \
 
 
   开始服务器上的训练
-  cd /home/xxp/data/whole_body_tracking
+
+安装IsaacLab-2.3.1以及isaacsim5.1
+cd /home/xxp/data/whole_body_tracking
 
 mkdir -p /home/xxp/data/tmp
 
@@ -87,13 +89,27 @@ scripts/rsl_rl/train_local.py \
   --run_name unt20dof_server_train \
   --num_envs 4096
 
-source ~/venvs/mujoco-check/bin/activate
+
+
+  训练完成从服务器获取训练目录
+rsync -avh --progress   xxp@10.193.128.35:/home/xxp/data/whole_body_tracking/logs/rsl_rl/unt_flat/2026-08-04_18-18-48_unt20dof_server_train/   /home/unt/pro1/server_training/2026-08-04_18-18-48_unt20dof_server_train/
+
+
+
+先在isaacsim下生成policy.pt
+RUN="2026-08-04_18-18-48_unt20dof_server_train"
+mkdir -p /home/unt/pro1/whole_body_tracking/logs/rsl_rl/unt_flat
+cp -a \
+  "/home/unt/pro1/server_training/$RUN" \
+  /home/unt/pro1/whole_body_tracking/logs/rsl_rl/unt_flat/
+
+conda activate motion_npz
+python scripts/rsl_rl/play.py   --task Tracking-Flat-UNT-v0   --num_envs 1   --load_run 2026-08-04_18-18-48_unt20dof_server_train --checkpoint model_29999.pt   --motion_file /home/unt/pro1/generated_motions/unt_david_20dof.npz
 
 
 
 
 
 
-conda deactivate   # 如有 conda
-source /opt/ros/jazzy/setup.bash
-source ~/colcon_ws/install/setup.bash
+
+
