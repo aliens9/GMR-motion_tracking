@@ -1,6 +1,6 @@
 # 首先安装IsaacLab-2.3.1以及isaacsim5.1
 
-# GMR-motion_tracking
+#  XSEN光捕重定向         GMR-motion_tracking
 
 查看是否处于T-pose状态，根据实际情况进行调整。
 
@@ -171,6 +171,7 @@ python scripts/rsl_rl/play.py   --task Tracking-Flat-UNT-v0   --num_envs 1   --l
 <img width="800" alt="image" src="https://github.com/user-attachments/assets/c07fc247-c521-41ec-9387-67acb7432d03" />
 </div>
 
+# 基于mujoco进行 sim to sim验证模型的物理泛化性
 
 
 
