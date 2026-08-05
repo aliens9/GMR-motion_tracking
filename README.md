@@ -1,6 +1,6 @@
 <div align="center">
    
-# DAVID Robot XSEN光捕  GMR-motion_tracking CODE
+# GMR-motion_tracking of DAVID-Robot-XSEN CODE
 [![IsaacSim](https://img.shields.io/badge/IsaacSim-5.1-silver.svg?style=flat-square)](https://docs.omniverse.nvidia.com/isaacsim/latest/overview.html)
 [![IsaacLab](https://img.shields.io/badge/IsaacLab-2.3.1-silver.svg?style=flat-square)](https://isaac-sim.github.io/IsaacLab)
 [![Python](https://img.shields.io/badge/python-3.10-blue.svg?style=flat-square&logo=python&logoColor=white)](https://www.python.org/)
