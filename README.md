@@ -91,7 +91,9 @@ python scripts/replay_npz_unt.py \
   --motion_file /home/unt/pro1/generated_motions/unt_david_20dof.npz
 
 
-在本地终端执行上传到服务器：
+# 在本地终端执行上传到服务器：
+
+```
 rsync -avh --progress --itemize-changes \
   --exclude='__pycache__/' \
   --exclude='*.pyc' \
@@ -101,12 +103,12 @@ rsync -avh --progress --itemize-changes \
 rsync -avh --progress \
   /home/unt/pro1/generated_motions/unt_david_20dof.npz \
   "${SERVER}:/home/xxp/data/unt_david.npz"
-
+```
 
 
 # 开始服务器上的训练
 
-# 安装IsaacLab-2.3.1以及isaacsim5.1
+#安装IsaacLab-2.3.1以及isaacsim5.1
 
 ```
 cd /home/xxp/data/whole_body_tracking
