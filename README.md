@@ -10,6 +10,11 @@
 
 </div>
 
+<div align="center">
+<img width="800"  alt="image" src="https://github.com/user-attachments/assets/5e03f11c-d6f6-439f-8fbd-b24a2a7073ae" />
+</div>
+
+
 # 本地显卡配置
 <div align="center">
 <img width="800" alt="image" src="https://github.com/user-attachments/assets/12b982b0-f0ad-478e-b948-fa59b02c5acd" />
