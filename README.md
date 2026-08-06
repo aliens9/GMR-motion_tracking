@@ -19,6 +19,8 @@
 
 # 查看Robot是否处于T-pose状态，根据实际情况进行调整。
 
+
+配置xml模型，对齐最终安全检测（AgentController 内高频执行）的关节limit。
 ```
 conda activate gmr
 python -m mujoco.viewer
