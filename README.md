@@ -261,6 +261,8 @@ ros2 launch rl_deployment agent.launch.py
 ```
 4
 ```
+__NV_PRIME_RENDER_OFFLOAD=1 \
+__GLX_VENDOR_LIBRARY_NAME=nvidia \
 ros2 launch mujoco_simulator mujoco.launch.py
 ```
 新建一个终端
