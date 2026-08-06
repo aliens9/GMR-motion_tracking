@@ -260,6 +260,7 @@ ros2 launch control control.launch.py
 ros2 launch rl_deployment agent.launch.py
 ```
 4
+而是 Docker 里的 MuJoCo 默认没有走 NVIDIA RTX 5060，而是退化成了 CPU 软件渲染
 ```
 __NV_PRIME_RENDER_OFFLOAD=1 \
 __GLX_VENDOR_LIBRARY_NAME=nvidia \
