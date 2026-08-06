@@ -266,11 +266,26 @@ __NV_PRIME_RENDER_OFFLOAD=1 \
 __GLX_VENDOR_LIBRARY_NAME=nvidia \
 ros2 launch mujoco_simulator mujoco.launch.py
 ```
-新建一个终端
+
+如图为FSM11的状态为原地站立
+<div align="center">
+<img width="800"  alt="image" src="https://github.com/user-attachments/assets/f62d57ec-9e5f-486d-81e5-59d88c067728" />
+</div>
+
+
+另开一个终端，进行mimic的sim to sim
 ```
 cd ~/pro1/unt_humanoid/docker/desktop
 ./start.sh
+cd ~/pro1/unt_humanoid
+source install/setup.bash
+source scripts/local_pc/env.sh mujoco
+ros2 topic pub --once /rl/fsm_switch std_msgs/msg/Int32 "{data: 26}"
 ```
+效果如图
+<div align="center">
+<img width="800"  alt="image" src="https://github.com/user-attachments/assets/3b4f20be-a765-48a8-b07e-a3ed2960c83c" />
+</div>
 
 ```
 cd ~/pro1/unt_humanoid
