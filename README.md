@@ -107,7 +107,7 @@ python scripts/vis_robot_motion.py \
 将pkl 复制一份到./motions 输出csv转化文件到 ./motions/csv中
 
 ```
-python scripts/batch_gmr_pkl_to_csv.py --folder pkl_export
+python scripts/batch_gmr_pkl_to_csv.py --folder 存放pkl的文件夹
 ```
 
 
