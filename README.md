@@ -145,12 +145,16 @@ python scripts/replay_npz_unt.py \
 # 在本地终端执行上传到服务器：
 
 ```
+SERVER=xxp@10.193.128.35
+
+# 同步 whole_body_tracking 源码
 rsync -avh --progress --itemize-changes \
   --exclude='__pycache__/' \
   --exclude='*.pyc' \
   /home/unt/pro1/whole_body_tracking/source/ \
-  xxp@10.193.128.35:/home/xxp/data/whole_body_tracking/source/
-同步脚本目录：
+  "${SERVER}:/home/xxp/data/whole_body_tracking/source/"
+
+# 同步 motion 数据
 rsync -avh --progress \
   /home/unt/pro1/generated_motions/unt_david_20dof.npz \
   "${SERVER}:/home/xxp/data/unt_david.npz"
