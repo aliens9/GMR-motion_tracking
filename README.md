@@ -189,6 +189,15 @@ scripts/rsl_rl/train_local.py \
 
 
 
+# 终端1：连服务器并转发,查看实时各奖励收敛情况
+```
+ssh -L 6006:localhost:6007 xxp@10.193.128.35
+```
+# 服务器上
+```
+tensorboard --logdir /home/xxp/data/xxx/runs --port 6006
+```
+
 # 训练完成从服务器获取训练目录
 
 ```
