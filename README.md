@@ -16,22 +16,29 @@
 
 
 # 本地显卡配置
+采用的电脑为ubtun24.0版本，本地电脑安装的ROS2-jaxy版本。但进行sim to sim以及后续依赖ROS2-humble，所以需要使用到DOCKER
+因为受isaacsim渲染依赖要求，并没有安装到最新的驱动。
 <div align="center">
 <img width="800" alt="image" src="https://github.com/user-attachments/assets/12b982b0-f0ad-478e-b948-fa59b02c5acd" />
 </div>
 
 
 
-# 查看Robot是否处于T-pose状态，根据实际情况进行调整。
+# 进行David模型对齐以及标定
+依托gmr_unt仓库
+1、初始给定的david为30dof，通过注释掉需要固定的关节来实现默认fixed状态，最终实现20dof，同步对齐urdf模型，将注释的部位从revolute改为fixed。
 
+2、配置xml模型，对齐最终安全检测（AgentController 内高频执行）的关节limit。
 
-配置xml模型，对齐最终安全检测（AgentController 内高频执行）的关节limit。
+3、查看Robot是否处于T-pose状态，根据当前显示的关节状态进行joint角度调整实现标准T-pose状态来获取一个调整好的xml模型或者通过修改
+/home/unt/pro1/gmr_unt/scripts/calibrate_bvh_xsens_to_david.py 文件中ROBOT_REFERENCE_QPOS中对应关节应该旋转的数值来进行调整。
+通过下述代码打开mujoco进行模型查看，拖入xml模型，关闭重力即可------
 ```
 conda activate gmr
 python -m mujoco.viewer
 ```
-拖入xml模型，关闭重力即可
 
+如图所示
 <div align="center">
 <img width="800" alt="image" src="https://github.com/user-attachments/assets/52828d86-d1f1-4b7b-8cec-d0dd7cba2d76" />
 </div>
@@ -40,41 +47,69 @@ python -m mujoco.viewer
 <div align="center">
 <img width="800" alt="image" src="https://github.com/user-attachments/assets/77209971-4f1b-40ec-9bc6-3b75cc5e601e" />
 </div>
-# 仅生成 offset 和 IK 配置
 
+# 生成Xsens下David相对人体坐标系的offset，完成IK 配置
+1、通过下面两种选择进行偏移计算操作获取配置脚本
+配置脚本绝对路径为
+`
+/home/unt/pro1/gmr_unt/calibration_output/bvh_xsens_to_unt_david.calibrated.json
+`
+
+无mujoco显示版本
 ```
 python scripts/calibrate_bvh_xsens_to_david.py
 ```
 
-# 或标定后顺便看 T-pose
+mujoco显示David进行标准T-pose展示
 
 ```
 python scripts/calibrate_bvh_xsens_to_david.py --view
 ```
 
-如图为T-pose状态
+如图为David处于T-pose状态
 <div align="center">
 <img width="800" alt="截图 2026-08-05 10-38-30" src="https://github.com/user-attachments/assets/c982e941-4bcc-46bd-a3f2-bfe70f3bee24" />
 </div>
-
-
-# 获取偏移 ,在文档
-general_motion_retargeting/ik_configs/bvh_xsens_to_unt_david.json
 
 
 ```
 conda activate gmr
 cd /home/unt/pro1/gmr_unt
 ```
-# 同步 IK 配置
+# 将所获取offset同步到bvh_xsens_to_unt_david.json完成IK 配置
+该文件绝对路径为
+`
+/home/unt/pro1/gmr_unt/general_motion_retargeting/ik_configs/bvh_xsens_to_unt_david.json
+`
+
+1、可选择下述操作完成数据覆盖
 ```
 cp calibration_output/bvh_xsens_to_unt_david.calibrated.json \
    general_motion_retargeting/ik_configs/bvh_xsens_to_unt_david.json
 ```
 
 
-# 进行重定向，根据重定向中的实际情况进行ik配置微调（权重和坐标）
-使用文件绝对路径
+# 进行重定向视频画面，根据重定向中各关节的实际情况进行ik配置微调（权重和坐标）
+例如：
+`
+"Link7_Arm_L": [
+    "LeftWrist",       # 目标人体关节
+    12.0,              # 位置跟踪权重
+    1.0,               # 姿态跟踪权重
+    [0.0, 0.0, 0.0],   # 位置偏移xyz，通过对照mujoco中关节坐标轴进行所需调整，其中红色为x,绿色为y，蓝色为z。
+    [0.5075, -0.4924, -0.5075, 0.4924]  # 旋转偏移（由上述T-pose 标定计算获取，一般不需要调整）。 quaternion 
+]
+`
+
+其中权重调整实际是优先考虑位置或者姿态，另一者选择牺牲一部分。
+
+
+<div align="center">
+<img width="800"  alt="image" src="https://github.com/user-attachments/assets/f6b08416-d9c1-461f-ab7d-6c813e9d0894" />
+</div>
+
+需要注意的点：关节穿模。
+
 ```
 python scripts/xsens_bvh_to_robot.py \
   --bvh_file /home/unt/pro1/gmr_unt/assets/xsens_bvh_test/251021_04_boxing_120Hz_cm_3DsMax.bvh \
@@ -82,7 +117,7 @@ python scripts/xsens_bvh_to_robot.py \
   --save_path /home/unt/pro1/gmr_unt/output_unt_david.pkl
 ```
 
-重定向如图
+重定向过程如图
 <div align="center">
 <img width="800" alt="截图 2026-08-05 10-52-20" src="https://github.com/user-attachments/assets/4f99e4e5-17ff-4bac-be81-c4c1d43f3554" />
      
@@ -91,7 +126,7 @@ python scripts/xsens_bvh_to_robot.py \
 
 
 
-进行回放查看效果
+进行回放查看重定向效果
 ```
 python scripts/vis_robot_motion.py \
   --robot unt_david \
@@ -103,7 +138,7 @@ python scripts/vis_robot_motion.py \
 </div>
 
 
-# 进行pkl到csv文件格式的转换
+#  进行pkl到csv文件格式的转换
 将pkl 复制一份到./motions 输出csv转化文件到 ./motions/csv中
 
 ```
