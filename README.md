@@ -26,6 +26,7 @@
 
 # 进行David模型对齐以及标定
 依托gmr_unt仓库
+
 1、初始给定的david为30dof，通过注释掉需要固定的关节来实现默认fixed状态，最终实现20dof，同步对齐urdf模型，将注释的部位从revolute改为fixed。
 
 2、配置xml模型，对齐最终安全检测（AgentController 内高频执行）的关节limit。
@@ -50,6 +51,7 @@ python -m mujoco.viewer
 
 # 生成Xsens下David相对人体坐标系的offset，完成IK 配置
 1、通过下面两种选择进行偏移计算操作获取配置脚本
+
 配置脚本绝对路径为
 `
 /home/unt/pro1/gmr_unt/calibration_output/bvh_xsens_to_unt_david.calibrated.json
@@ -67,6 +69,7 @@ python scripts/calibrate_bvh_xsens_to_david.py --view
 ```
 
 如图为David处于T-pose状态
+
 <div align="center">
 <img width="800" alt="截图 2026-08-05 10-38-30" src="https://github.com/user-attachments/assets/c982e941-4bcc-46bd-a3f2-bfe70f3bee24" />
 </div>
@@ -77,6 +80,7 @@ conda activate gmr
 cd /home/unt/pro1/gmr_unt
 ```
 # 将所获取offset同步到bvh_xsens_to_unt_david.json完成IK 配置
+
 该文件绝对路径为
 `
 /home/unt/pro1/gmr_unt/general_motion_retargeting/ik_configs/bvh_xsens_to_unt_david.json
@@ -90,14 +94,21 @@ cp calibration_output/bvh_xsens_to_unt_david.calibrated.json \
 
 
 # 进行重定向视频画面，根据重定向中各关节的实际情况进行ik配置微调（权重和坐标）
+
 例如：
 `
 "Link7_Arm_L": [
+
     "LeftWrist",       # 目标人体关节
+    
     12.0,              # 位置跟踪权重
+    
     1.0,               # 姿态跟踪权重
+    
     [0.0, 0.0, 0.0],   # 位置偏移xyz，通过对照mujoco中关节坐标轴进行所需调整，其中红色为x,绿色为y，蓝色为z。
+    
     [0.5075, -0.4924, -0.5075, 0.4924]  # 旋转偏移（由上述T-pose 标定计算获取，一般不需要调整）。 quaternion 
+
 ]
 `
 
@@ -118,6 +129,7 @@ python scripts/xsens_bvh_to_robot.py \
 ```
 
 重定向过程如图
+
 <div align="center">
 <img width="800" alt="截图 2026-08-05 10-52-20" src="https://github.com/user-attachments/assets/4f99e4e5-17ff-4bac-be81-c4c1d43f3554" />
      
@@ -127,6 +139,7 @@ python scripts/xsens_bvh_to_robot.py \
 
 
 进行回放查看重定向效果
+
 ```
 python scripts/vis_robot_motion.py \
   --robot unt_david \
@@ -140,13 +153,15 @@ python scripts/vis_robot_motion.py \
 
 #  进行pkl到csv文件格式的转换
 将pkl 复制一份到./motions 输出csv转化文件到 ./motions/csv中
+```
+cp /home/unt/pro1/gmr_unt/output_unt_david.pkl /home/unt/pro1/gmr_unt/motions/output_unt_david.pkl
+```
+
+开始进行转换
 
 ```
-python scripts/batch_gmr_pkl_to_csv.py --folder 存放pkl的文件夹
+python scripts/batch_gmr_pkl_to_csv.py --folder motions
 ```
-
-
-
 
 # 进行csv到npz文件的转换
 
@@ -160,11 +175,12 @@ python scripts/csv_to_npz_unt.py \
   --output_name unt_david_20dof \
   --output_file /home/unt/pro1/generated_motions/unt_david_20dof.npz
 ```
+
 <div align="center">
 <img width="800" alt="image" src="https://github.com/user-attachments/assets/32fd9ea8-7f55-4f63-bdf7-78ae3f294b95" />
 </div>
 
-进行回放测试
+进行npz格式下在isaacsim回放测试
 
 ```
 python scripts/replay_npz_unt.py \
@@ -177,7 +193,32 @@ python scripts/replay_npz_unt.py \
 
 
 
-# 在本地终端执行上传到服务器：
+上述完成整个GMR的过程。
+
+
+
+# 基于Beyondmimic进行motion-tracking
+
+
+1、在/home/unt/pro1/whole_body_tracking/source/whole_body_tracking/whole_body_tracking/robots/unt_robot.py 中定义 UNT / David 20DoF 人形机器人在 IsaacLab 里的机器人配置
+
+2、修改/home/unt/pro1/whole_body_tracking/source/whole_body_tracking/whole_body_tracking/tasks/tracking/config/unt/flat_env_cfg.py中继承的TrackingEnvCfg的配置，去掉actor中现实难以获取的observations 
+
+--motion_anchor_pos_b     
+
+-- base_lin_vel
+
+调整observation中joint_vel 的noise为n_min=-1.5, n_max=1.5---
+
+
+3、整个env配置完成，采用当前本地的算法。
+
+4、将整个环境打包送入服务器进行训练
+
+# 服务器进行训练准备：首先配置安装IsaacLab-2.3.1以及isaacsim5.1
+
+
+1、 在本地终端执行，下述代码将环境文件以及npz打包上传到服务器
 
 ```
 SERVER=xxp@10.193.128.35
@@ -198,13 +239,12 @@ rsync -avh --progress \
 
 # 开始服务器上的训练
 
-#安装IsaacLab-2.3.1以及isaacsim5.1
-
+1、第一次训练可以先建立临时空间
 ```
 cd /home/xxp/data/whole_body_tracking
 mkdir -p /home/xxp/data/tmp
 ```
-
+2、开始训练
 ```
 export CUDA_VISIBLE_DEVICES=0
 export TMPDIR=/home/xxp/data/tmp
@@ -224,13 +264,13 @@ scripts/rsl_rl/train_local.py \
 
 
 
-# 终端1：连服务器并转发,查看实时各奖励收敛情况
+# 本地终端：连服务器并转发,查看实时各奖励收敛情况
 ```
 ssh -L 6006:localhost:6007 xxp@10.193.128.35
 ```
 # 服务器上
 ```
-tensorboard --logdir /home/xxp/data/xxx/runs --port 6006
+tensorboard --logdir /home/xxp/data/xxx/runs --port 6007
 ```
 
 # 训练完成从服务器获取训练目录
