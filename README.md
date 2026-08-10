@@ -276,7 +276,7 @@ tensorboard --logdir /home/xxp/data/xxx/runs --port 6007
 # 训练完成从服务器获取训练目录
 
 ```
-rsync -avh --progress   xxp@10.193.128.35:/home/xxp/data/whole_body_tracking/logs/rsl_rl/unt_flat/2026-08-04_18-18-48_unt20dof_server_train/   /home/unt/pro1/server_training/2026-08-04_18-18-48_unt20dof_server_train/
+scp -r xxp@10.193.128.35:/home/xxp/data/whole_body_tracking/logs/rsl_rl/unt_flat/2026-08-07_13-43-05_unt20dofwithsafe /home/unt/pro1/whole_body_tracking/logs/rsl_rl/unt_flat/
 ```
 
 
