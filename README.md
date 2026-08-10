@@ -174,7 +174,10 @@ python scripts/csv_to_npz_unt.py \
   --output_fps 50 \
   --output_name unt_david_20dof \
   --output_file /home/unt/pro1/generated_motions/unt_david_20dof.npz
+  --stand_duration 1.0 \
+  --transition_duration 1.0 \
 ```
+--motion_start_idx 3 \
 
 <div align="center">
 <img width="800" alt="image" src="https://github.com/user-attachments/assets/32fd9ea8-7f55-4f63-bdf7-78ae3f294b95" />
