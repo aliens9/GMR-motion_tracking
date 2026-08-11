@@ -311,6 +311,25 @@ cd /home/unt/pro1/unt_humanoid/docker/desktop
 ./start.sh
 ```
 
+
+```
+cd ~/pro1/unt_humanoid
+
+# 1. 退出 conda（避免用到 miniconda 的 Python）
+conda deactivate
+
+# 2. 加载环境
+source /opt/ros/humble/setup.bash
+source build/conan/conanrosenv.sh
+source install/local_setup.bash   # 注意：用 local_setup，不要用 setup.bash
+
+# 3. 编译 Debug 版
+colcon build --merge-install \
+  --packages-select rl_deployment \
+  --cmake-args -DCMAKE_BUILD_TYPE=Debug \
+  -DPython3_EXECUTABLE=/usr/bin/python3 \
+  -DCMAKE_PREFIX_PATH=$(pwd)/build/conan/
+
 ```
 
 ```
