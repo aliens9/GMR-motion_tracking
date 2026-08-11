@@ -329,6 +329,10 @@ colcon build --merge-install \
 ```
 
 
+每次更新后
+```
+colcon build --merge-install --packages-select rl_deployment
+```
 
 
 在install中rl deploy调整config mimic.yaml中的onnx路径以及帧数 以及kp和kd参数action scale
