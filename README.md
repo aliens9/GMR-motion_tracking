@@ -341,7 +341,7 @@ cd ~/pro1/unt_humanoid/docker/desktop
 ./start.sh
 ```
 
-创建5个分屏
+创建mimic-tmux 5个分屏
 ```
 tmux new-session -s mimic -d
 tmux split-window -h
@@ -406,6 +406,8 @@ ros2 topic pub --once /rl/fsm_switch std_msgs/msg/Int32 "{data: 26}"
 <img width="800"  alt="image" src="https://github.com/user-attachments/assets/3b4f20be-a765-48a8-b07e-a3ed2960c83c" />
 </div>
 
+
+可在/home/unt/pro1/unt_humanoid/src/rl_deployment/config/fsm_config.yaml进行默认walk模式的调整
 ```
 cd ~/pro1/unt_humanoid
 source install/setup.bash
@@ -416,7 +418,9 @@ ros2 topic pub --once /rl/fsm_switch std_msgs/msg/Int32 "{data: 26}"
 ```
 
 
+在真机部署前进行stand模式及walk模式的调整
 
+在/home/unt/pro1/unt_humanoid/src/rl_deployment/src/AgentNode.cpp 进行stand模式调整到站立弯曲模式11,walk模式调到mimic的 26
 
 
  # 开始真机调试
@@ -433,6 +437,17 @@ ssh -p 222 tztek@10.193.252.21
 ```
 sudo ./xxp/install/deploy.sh
 ```
+
+# 查看各关节启动状态,先赋予root权限
+```
+sudo su
+```
+
+# 观察是否op
+```
+watch -n 0.5 "ethercat slaves"
+```
+
 
 ```
 ./test.sh
@@ -455,4 +470,7 @@ sudo ./xxp/install/deploy.sh
 
 
 1、将摇杆设置成 SWA = 2， SWB = 0， SWC = 2， SWD = 0 ，拨SWH触发，进入rl的行走模式，切换为行走模型。
+
+记录deploy效果，站不稳有点。
+
 
