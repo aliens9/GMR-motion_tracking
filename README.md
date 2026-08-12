@@ -418,6 +418,9 @@ ros2 topic pub --once /rl/fsm_switch std_msgs/msg/Int32 "{data: 26}"
 
 
 
+
+ # 开始真机调试
+ 
 ```
 rsync -avhP -e "ssh -p 222" /home/unt/pro1/unt_humanoid/install/ tztek@10.193.252.21:/agibot/data/home/tztek/xxp/install/
 ```
@@ -426,7 +429,7 @@ rsync -avhP -e "ssh -p 222" /home/unt/pro1/unt_humanoid/install/ tztek@10.193.25
 ssh -p 222 tztek@10.193.252.21
 ```
 
-
+# 启动急停按钮
 ```
 sudo ./xxp/install/deploy.sh
 ```
@@ -435,12 +438,15 @@ sudo ./xxp/install/deploy.sh
 ./test.sh
 ```
 
-航模遥控器启动
+# 航模遥控器启动
+
 1、将摇杆设置成SWF = 2， SWA = SWB = 0， SWC = 0， SWD = 0，拨SWH触发`进入上使能状态；
 
 2 、将摇杆SWE设置成 SWE=0 ，（停止全段录制数据，和orin上的服务冲突）
 
 3、启动agent_node节点：（只在2窗口按回车键）启动 rl_deployment，执行rl_deployment时会自动完成初始化动作（手臂张开，腿部弯曲）
+
+
 
 
 1、初始化动作完成之后，下降吊架，把机器人放置到地面，保持上身直立且足部稳定接触地面
