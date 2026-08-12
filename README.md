@@ -418,12 +418,13 @@ ros2 topic pub --once /rl/fsm_switch std_msgs/msg/Int32 "{data: 26}"
 
 
 
-
+```
 rsync -avhP -e "ssh -p 222" /home/unt/pro1/unt_humanoid/install/ tztek@10.193.252.21:/agibot/data/home/tztek/xxp/install/
+```
 
-
+```
 ssh -p 222 tztek@10.193.252.21
-
+```
 
 
 
