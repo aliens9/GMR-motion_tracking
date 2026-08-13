@@ -15,7 +15,19 @@
 </div>
 
 
-# 本地显卡配置
+
+
+# 数据采集
+
+安装Xsens Animate 打开下载文件夹，插上权限dog进行activate tool。
+
+
+
+
+
+
+
+# 数据处理及本地显卡配置
 采用的电脑为ubtun24.0版本，本地电脑安装的ROS2-jaxy版本。但进行sim to sim以及后续依赖ROS2-humble，所以需要使用到DOCKER
 因为受isaacsim渲染依赖要求，并没有安装到最新的驱动。
 <div align="center">
