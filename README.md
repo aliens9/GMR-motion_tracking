@@ -17,7 +17,7 @@
 
 
 
-# 数据采集
+# 数据采集，Xsens软件启动
 
 安装Xsens Animate 打开下载文件夹，插上黑色 USB 加密狗 Dongle ，打开 Xsens License Manager 
 
