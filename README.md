@@ -21,7 +21,18 @@
 
 安装Xsens Animate 打开下载文件夹，插上黑色 USB 加密狗 Dongle ，打开 Xsens License Manager 
 
-激活许可证到 dongle，启动 Xsens Animate
+激活许可证到 dongle，
+
+每次打开Xsens软件都需要插上Xsens加密狗-Sentinel,如图，启动 Xsens Animate
+<div align="center">
+<img width="800" alt="image" src="https://github.com/user-attachments/assets/79248cd2-1e31-4c06-89d9-865bd5fa0c73" />
+<img width="800" alt="image" alt="20260813-112502" src="https://github.com/user-attachments/assets/f2caf72b-40ad-4c31-a77b-8646dfb3fad6" />
+
+
+</div>
+
+
+
 
 
 
