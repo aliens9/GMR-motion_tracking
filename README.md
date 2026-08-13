@@ -19,8 +19,9 @@
 
 # 数据采集
 
-安装Xsens Animate 打开下载文件夹，插上权限dog进行activate tool。
+安装Xsens Animate 打开下载文件夹，插上黑色 USB 加密狗 Dongle ，打开 Xsens License Manager 
 
+激活许可证到 dongle，启动 Xsens Animate
 
 
 
