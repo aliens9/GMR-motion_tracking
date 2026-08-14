@@ -17,7 +17,7 @@
 
 
 
-# 数据采集，Xsens软件启动
+# 数据采集，Xsens软件启动，我们采用的是MVN Link模式  ，另外一种模式是MVN Awinda 
 
 安装Xsens Animate 打开下载文件夹，插上黑色 USB 加密狗 Dongle ，打开 Xsens License Manager 
 
@@ -32,6 +32,43 @@
 </div>
 
 
+通过网线加上转接插口连接路由器到电脑，找到body pack，将移动电源插在body pack上，然后按下按钮，出现白灯闪烁，完成路由器和body pack间的wps配对
+
+如图分别为路由器和 body pack
+<div align="center">
+<img width="800" alt="image" src="https://github.com/user-attachments/assets/f611fb72-4253-4bd9-954f-c8858ac01d55" />
+
+<img width="800" alt="image" src="https://github.com/user-attachments/assets/05dd23c7-5c82-4fe6-bbbc-0080debff6db" />
+</div>
+
+
+打开Xsens软件，窗口右下角通信信号观测是否正常连接。
+
+
+衣服穿戴核心就是把 17 个无线传感器固定到指定身体段，而且位置和方向要对、运动过程中不能滑动。
+
+
+头部 Head
+
+胸骨 Sternum
+
+骨盆 Pelvis
+
+左/右肩 Shoulder
+
+左/右上臂 Upper Arm
+
+左/右前臂 Forearm
+
+左/右手 Hand
+
+左/右大腿 Upper Leg
+
+左/右小腿 Lower Leg
+
+左/右脚 Foot
+
+导出文件时选择输出预设3d studio max
 
 
 
@@ -469,7 +506,7 @@ sudo su
 
 # 观察是否op
 ```
-watch -n 0.5 "ethercat slaves"
+watch -n 0.5 ethercat slaves
 ```
 
 
