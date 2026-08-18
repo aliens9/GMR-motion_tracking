@@ -25,8 +25,8 @@
 
 每次打开Xsens软件都需要插上Xsens加密狗-Sentinel,如图，启动 Xsens Animate
 <div align="center">
-<img width="800" alt="image" src="https://github.com/user-attachments/assets/79248cd2-1e31-4c06-89d9-865bd5fa0c73" />
-<img width="800" alt="image" alt="20260813-112502" src="https://github.com/user-attachments/assets/f2caf72b-40ad-4c31-a77b-8646dfb3fad6" />
+<img width="600" alt="image" src="https://github.com/user-attachments/assets/79248cd2-1e31-4c06-89d9-865bd5fa0c73" />
+<img width="600" alt="image" alt="20260813-112502" src="https://github.com/user-attachments/assets/f2caf72b-40ad-4c31-a77b-8646dfb3fad6" />
 
 
 </div>
@@ -36,9 +36,9 @@
 
 如图分别为路由器和 body pack
 <div align="center">
-<img width="800" alt="image" src="https://github.com/user-attachments/assets/f611fb72-4253-4bd9-954f-c8858ac01d55" />
+<img width="600" alt="image" src="https://github.com/user-attachments/assets/f611fb72-4253-4bd9-954f-c8858ac01d55" />
 
-<img width="800" alt="image" src="https://github.com/user-attachments/assets/05dd23c7-5c82-4fe6-bbbc-0080debff6db" />
+<img width="600" alt="image" src="https://github.com/user-attachments/assets/05dd23c7-5c82-4fe6-bbbc-0080debff6db" />
 </div>
 
 
@@ -483,6 +483,25 @@ ros2 topic pub --once /rl/fsm_switch std_msgs/msg/Int32 "{data: 26}"
 
 在/home/unt/pro1/unt_humanoid/src/rl_deployment/src/AgentNode.cpp 进行stand模式调整到站立弯曲模式11,walk模式调到mimic的 26
 
+
+
+
+
+启动plotjungle 进行受力查看
+
+```
+source /opt/ros/humble/setup.bash
+source ~/pro1/unt_humanoid/install/local_setup.bash
+```
+
+和仿真保持一致（Docker 开发环境推荐）
+
+```
+export ROS_DOMAIN_ID=0
+export ROS_LOCALHOST_ONLY=1
+unset FASTRTPS_DEFAULT_PROFILES_FILE
+ros2 run plotjuggler plotjuggler
+```
 
  # 开始真机调试
  
