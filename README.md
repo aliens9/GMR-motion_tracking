@@ -360,6 +360,7 @@ python scripts/rsl_rl/play.py   --task Tracking-Flat-UNT-v0   --num_envs 1   --l
 # 基于mujoco进行 sim to sim验证模型的物理泛化性
 
 首先安装完docker,进行启动，通过cursor连接docker容器
+
 ```
 cd /home/unt/pro1/unt_humanoid/docker/desktop
 ./start.sh
@@ -368,6 +369,8 @@ cd /home/unt/pro1/unt_humanoid/docker/desktop
 
 
 # 3. 编译 Debug 版
+
+```
 colcon build --merge-install \
   --packages-select rl_deployment \
   --cmake-args -DCMAKE_BUILD_TYPE=Debug \
@@ -377,6 +380,7 @@ colcon build --merge-install \
 
 
 每次更新src中的文件，在src中rl deploy调整config mimic.yaml中的onnx路径以及帧数 以及kp和kd参数action scale
+
 ```
 make build
 ```
@@ -390,6 +394,7 @@ cd ~/pro1/unt_humanoid/docker/desktop
 ```
 
 创建mimic-tmux 5个分屏
+
 ```
 tmux new-session -s mimic -d
 tmux split-window -h
@@ -403,6 +408,7 @@ tmux attach -t mimic
 ```
 
 对每个分屏进行
+
 ```
 cd ~/pro1/unt_humanoid
 source install/setup.bash
