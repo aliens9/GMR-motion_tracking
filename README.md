@@ -332,7 +332,7 @@ scripts/rsl_rl/train_local.py \
 ```
 ssh -L 6006:localhost:6007 xxp@10.193.128.35
 ```
-# 服务器上
+# 服务器上进行
 ```
 tensorboard --logdir /home/xxp/data/xxx/runs --port 6007
 ```
@@ -340,21 +340,14 @@ tensorboard --logdir /home/xxp/data/xxx/runs --port 6007
 # 训练完成从服务器获取训练目录
 
 ```
+mkdir -p /home/unt/pro1/whole_body_tracking/logs/rsl_rl/unt_flat
 scp -r xxp@10.193.128.35:/home/xxp/data/whole_body_tracking/logs/rsl_rl/unt_flat/2026-08-07_13-43-05_unt20dofwithsafe /home/unt/pro1/whole_body_tracking/logs/rsl_rl/unt_flat/
 ```
 
 
 
-# 先在isaacsim下生成policy.pt
+# 先在isaacsim下生成policy.pt，回到本地查看训练效果
 
-```
-RUN="2026-08-04_18-18-48_unt20dof_server_train"
-mkdir -p /home/unt/pro1/whole_body_tracking/logs/rsl_rl/unt_flat
-cp -a \
-  "/home/unt/pro1/server_training/$RUN" \
-  /home/unt/pro1/whole_body_tracking/logs/rsl_rl/unt_flat/
-```
-# 回到本地查看训练效果
 ```
 conda activate motion_npz
 python scripts/rsl_rl/play.py   --task Tracking-Flat-UNT-v0   --num_envs 1   --load_run 2026-08-04_18-18-48_unt20dof_server_train --checkpoint model_29999.pt   --motion_file /home/unt/pro1/generated_motions/unt_david_20dof.npz
@@ -366,20 +359,13 @@ python scripts/rsl_rl/play.py   --task Tracking-Flat-UNT-v0   --num_envs 1   --l
 
 # 基于mujoco进行 sim to sim验证模型的物理泛化性
 
-首先安装完docker,进行启动
+首先安装完docker,进行启动，通过cursor连接docker容器
 ```
 cd /home/unt/pro1/unt_humanoid/docker/desktop
 ./start.sh
 ```
 
 
-```
-conda deactivate
-
-# 2. 加载环境
-source /opt/ros/humble/setup.bash
-source build/conan/conanrosenv.sh
-source install/local_setup.bash   # 注意：用 local_setup，不要用 setup.bash
 
 # 3. 编译 Debug 版
 colcon build --merge-install \
@@ -390,13 +376,14 @@ colcon build --merge-install \
 ```
 
 
-每次更新后
+每次更新src中的文件，在src中rl deploy调整config mimic.yaml中的onnx路径以及帧数 以及kp和kd参数action scale
 ```
-colcon build --merge-install --packages-select rl_deployment
+make build
 ```
 
 
-在install中rl deploy调整config mimic.yaml中的onnx路径以及帧数 以及kp和kd参数action scale
+# 进行sim_to_sim验证及发布节点信息
+
 ```
 cd ~/pro1/unt_humanoid/docker/desktop
 ./start.sh
